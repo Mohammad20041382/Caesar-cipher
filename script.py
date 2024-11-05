@@ -1,19 +1,31 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Python Web App</title>
-</head>
-<body>
-    <h1>Python Output</h1>
-    <div id="output"></div>
-    <script>
-        fetch('https://api.github.com/repos/USERNAME/REPOSITORY_NAME/contents/path/to/python_output.txt')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('output').textContent = atob(data.content);
-        });
-    </script>
-</body>
-</html>
+alphabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
+
+def encrypt(original_text, shift_amount):
+    cipher_text = ""
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) + shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the encoded result: {cipher_text}")
+
+def decrypt(original_text, shift_amount):
+    cipher_text = ""
+    for letter in original_text:
+        shifted_position = alphabet.index(letter) - shift_amount
+        shifted_position %= len(alphabet)
+        cipher_text += alphabet[shifted_position]
+    print(f"Here is the decoded result: {cipher_text}")
+
+
+while True:
+    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n").lower()
+    text = input("Type your message:\n").lower()
+    shift = int(input("Type the shift number:\n"))
+    encrypt(original_text=text, shift_amount=shift)
+
+    decrypt(original_text=text, shift_amount=shift)
+
+    Q = input("Do you want to continue? Type 'yes' to continue, or 'no' to exit:\n").lower()
+    if Q != 'yes':
+        print("Thank you for using the program. Have a great day!")
+        break
